@@ -44,7 +44,7 @@ async function main() {
 
     if(path.isAbsolute(messagePath)){
         fs.readFile(messagePath, async function(err, data){
-            parsedData = data.replace(replaceANSI,"")
+            parsedData = data.toString().replace(replaceANSI,"")
             let message = messagePrefix + "\n" + parsedData + "\n" + messageSuffix
 
             await commentToPR(message, PRtoComment)
@@ -52,7 +52,7 @@ async function main() {
     }else{
         let filePath = path.resolve(process.cwd(),messagePath)
         fs.readFile(filePath, async function(err,data){
-            parsedData = data.replace(replaceANSI,"")
+            parsedData = data.toString().replace(replaceANSI,"")
             let message = messagePrefix + "\n" + parsedData + "\n" + messageSuffix
 
             await commentToPR(message, PRtoComment)
