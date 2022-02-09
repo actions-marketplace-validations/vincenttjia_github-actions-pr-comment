@@ -4,6 +4,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
 const context = github.context;
+const replaceANSI = new RegExp("[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]","g")
 
 
 async function getPrNumber() {
@@ -43,14 +44,16 @@ async function main() {
 
     if(path.isAbsolute(messagePath)){
         fs.readFile(messagePath, async function(err, data){
-            let message = messagePrefix + "\n" + data + "\n" + messageSuffix
+            parsedData = data.replace(replaceANSI,"")
+            let message = messagePrefix + "\n" + parsedData + "\n" + messageSuffix
 
             await commentToPR(message, PRtoComment)
         })
     }else{
         let filePath = path.resolve(process.cwd(),messagePath)
         fs.readFile(filePath, async function(err,data){
-            let message = messagePrefix + "\n" + data + "\n" + messageSuffix
+            parsedData = data.replace(replaceANSI,"")
+            let message = messagePrefix + "\n" + parsedData + "\n" + messageSuffix
 
             await commentToPR(message, PRtoComment)
         })
