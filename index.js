@@ -7,7 +7,7 @@ const context = github.context;
 
 
 async function getPrNumber() {
-    let event = JSON.loads(process.env.GITHUB_EVENT_PATH)
+    let event = JSON.parse(process.env.GITHUB_EVENT_PATH)
 
     if(process.env.GITHUB_EVENT_PATH == "pull_request"){
         return event.number
