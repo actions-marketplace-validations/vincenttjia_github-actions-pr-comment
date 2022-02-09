@@ -9,7 +9,7 @@ const context = github.context;
 async function getPrNumber() {
     pr_number = core.getInput('pr_number', { required: false })
 
-    if(pr_number != ""){
+    if(pr_number){
         return pr_number
     }else{
         result = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
