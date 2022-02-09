@@ -6,11 +6,13 @@ const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
 const context = github.context;
 
 async function getPrNumber() {
-    return await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
+    result = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
         owner: context.repo.owner,
         repo: context.repo.repo,
         commit_sha: core.getInput('commitSHA', { required: true }),
     });
+
+    return result.data[0].number
 }
 
 async function commentToPR(message, PRNumber){
@@ -25,8 +27,8 @@ async function commentToPR(message, PRNumber){
 }
 
 
-let main = () => {
-    let PRtoComment = getPrNumber();
+async function main() {
+    let PRtoComment = await getPrNumber();
     let message = core.getInput('messagePrefix', { required: false }) || "";
     let data = ""
     let messageSuffix = core.getInput('messageSuffix', { required: false }) || "";
@@ -37,19 +39,18 @@ let main = () => {
             message += data;
             message += messageSuffix;
 
-            commentToPR("testMessage", PRtoComment)
+            await commentToPR("testMessage", PRtoComment)
         })
     }else{
         fs.readFile(__dirname + "/" + messagePath, function(err,data){
             message += data;
             message += messageSuffix;
 
-            commentToPR("testMessage", PRtoComment)
+            await commentToPR("testMessage", PRtoComment)
         })
     }
 
     return;
-
 }
 
 main()
