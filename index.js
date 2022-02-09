@@ -39,14 +39,14 @@ async function main() {
             message += data;
             message += messageSuffix;
 
-            await commentToPR("testMessage", PRtoComment)
+            await commentToPR(message, PRtoComment)
         })
     }else{
         fs.readFile(__dirname + "/" + messagePath, async function(err,data){
             message += data;
             message += messageSuffix;
 
-            await commentToPR("testMessage", PRtoComment)
+            await commentToPR(message, PRtoComment)
         })
     }
 
