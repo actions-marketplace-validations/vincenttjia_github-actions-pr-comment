@@ -13,7 +13,7 @@ async function getPrNumber() {
     });
 }
 
-function commentToPR(message, PRNumber){
+async function commentToPR(message, PRNumber){
     const new_comment = octokit.issues.createComment({
         ...context.repo,
         issue_number: PRNumber,
@@ -25,7 +25,7 @@ function commentToPR(message, PRNumber){
 
 
 let main = () => {
-    let PRtoComment = await getPrNumber();
+    let PRtoComment = getPrNumber();
     let message = core.getInput('messagePrefix', { required: false }) || "";
     let data = ""
     let messageSuffix = core.getInput('messageSuffix', { required: false }) || "";

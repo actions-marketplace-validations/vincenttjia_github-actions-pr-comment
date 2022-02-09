@@ -7,7 +7,7 @@ LABEL "com.github.actions.maintainer"="Vincent Tjianattan <t-vincent.tjianattan@
 LABEL "com.github.actions.icon"="message-circle"
 LABEL "com.github.actions.color"="black"
 
-ADD ./* $HOME/
+ADD ./* /
 
 RUN npm install
-ENTRYPOINT ["node", "index.js"]
+ENTRYPOINT ["node", "/index.js"]
