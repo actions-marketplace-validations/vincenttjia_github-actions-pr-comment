@@ -45,7 +45,7 @@ async function main() {
             await commentToPR(message, PRtoComment)
         })
     }else{
-        fs.readFile("/github/workspace/"+messagePath, async function(err,data){
+        fs.readFile(__dirname + "/" + messagePath, async function(err,data){
             message += data;
             message += messageSuffix;
 
