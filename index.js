@@ -34,19 +34,20 @@ async function main() {
     let messagePath = core.getInput('path', { required: true });
 
     if(path.isAbsolute(messagePath)){
-        let data = await fs.readFile(messagePath, 'utf-8')
+        fs.readFile(messagePath, async function(err, data){
+            message += data;
+            message += messageSuffix;
 
-        message += data;
-        message += messageSuffix;
-        await commentToPR(message, PRtoComment)
+            await commentToPR(message, PRtoComment)
+        })
     }else{
         let filePath = path.resolve(process.cwd(),messagePath)
-        let data = await fs.readFile(filePath, 'utf-8')
+        fs.readFile(filePath, async function(err,data){
+            message += data;
+            message += messageSuffix;
 
-        message += data;
-        message += messageSuffix;
-
-        await commentToPR(message, PRtoComment)
+            await commentToPR(message, PRtoComment)
+        })
     }
 
     return;
