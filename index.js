@@ -5,14 +5,22 @@ const github = require('@actions/github');
 const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
 const context = github.context;
 
-async function getPrNumber() {
-    result = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        commit_sha: core.getInput('commitSHA', { required: true }),
-    });
 
-    return result.data[0].number
+async function getPrNumber() {
+    let event = JSON.loads(process.env.GITHUB_EVENT_PATH)
+
+    if(process.env.GITHUB_EVENT_PATH == "pull_request"){
+        return event.number
+    }else{
+        result = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            commit_sha: core.getInput('commitSHA', { required: true }),
+        });
+    
+        return result.data[0].number
+    }
+    
 }
 
 async function commentToPR(message, PRNumber){
