@@ -35,14 +35,14 @@ async function main() {
     let messagePath = core.getInput('path', { required: true });
 
     if(path.isAbsolute(messagePath)){
-        fs.readFile(messagePath, function(err, data){
+        fs.readFile(messagePath, async function(err, data){
             message += data;
             message += messageSuffix;
 
             await commentToPR("testMessage", PRtoComment)
         })
     }else{
-        fs.readFile(__dirname + "/" + messagePath, function(err,data){
+        fs.readFile(__dirname + "/" + messagePath, async function(err,data){
             message += data;
             message += messageSuffix;
 
