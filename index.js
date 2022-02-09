@@ -35,14 +35,14 @@ async function main() {
 
     if(path.isAbsolute(messagePath)){
         fs.readFile(messagePath, async function(err, data){
-            let message = messagePrefix + data + messageSuffix
+            let message = messagePrefix + "\n" + data + "\n" + messageSuffix
 
             await commentToPR(message, PRtoComment)
         })
     }else{
         let filePath = path.resolve(process.cwd(),messagePath)
         fs.readFile(filePath, async function(err,data){
-            let message = messagePrefix + data + messageSuffix
+            let message = messagePrefix + "\n" + data + "\n" + messageSuffix
 
             await commentToPR(message, PRtoComment)
         })
