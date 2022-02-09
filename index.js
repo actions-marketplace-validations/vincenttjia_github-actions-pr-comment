@@ -7,10 +7,10 @@ const context = github.context;
 
 
 async function getPrNumber() {
-    let event = JSON.parse(process.env.GITHUB_EVENT_PATH)
+    pr_number = core.getInput('pr_number', { required: false })
 
-    if(process.env.GITHUB_EVENT_PATH == "pull_request"){
-        return event.number
+    if(pr_number != ""){
+        return pr_number
     }else{
         result = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
             owner: context.repo.owner,

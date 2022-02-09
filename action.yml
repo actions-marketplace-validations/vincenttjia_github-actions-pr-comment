@@ -15,6 +15,10 @@ inputs:
     description: The SHA of the commit
     required: true
     default: ${{ github.event.pull_request.head.sha || github.sha }}
+  pr_number:
+    description: "PR Number"
+    required: false
+    default: ${{ github.event.number || "" }}
   path: 
     description: Message content
     required: true
