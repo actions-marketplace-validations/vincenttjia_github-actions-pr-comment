@@ -33,6 +33,10 @@ async function main() {
     let messageSuffix = core.getInput('messageSuffix', { required: false }) || "";
     let messagePath = core.getInput('path', { required: true });
 
+    console.log(messagePath)
+    console.log(process.cwd())
+    console.log(__dirname)
+
     if(path.isAbsolute(messagePath)){
         fs.readFile(messagePath, async function(err, data){
             message += data;
