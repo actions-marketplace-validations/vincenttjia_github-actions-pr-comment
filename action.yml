@@ -8,7 +8,7 @@ inputs:
   messagePrefix:
     description: Add a prefix to the message
     required: false
-  messgaeSuffix:
+  messageSuffix:
     description: Add a suffix to the message
     required: false
   commitSHA:

@@ -37,14 +37,14 @@ let main = () => {
             message += data;
             message += messageSuffix;
 
-            commentToPR(message, PRtoComment)
+            commentToPR("testMessage", PRtoComment)
         })
     }else{
         fs.readFile(__dirname + "/" + messagePath, function(err,data){
             message += data;
             message += messageSuffix;
 
-            commentToPR(message, PRtoComment)
+            commentToPR("testMessage", PRtoComment)
         })
     }
 
