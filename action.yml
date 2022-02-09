@@ -17,7 +17,7 @@ inputs:
     default: ${{ github.event.pull_request.head.sha || github.sha }}
   pr_number:
     description: "PR Number"
-    required: false
+    required: true
     default: ${{ github.event.number || false }}
   path: 
     description: Message content
