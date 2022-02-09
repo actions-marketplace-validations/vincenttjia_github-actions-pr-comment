@@ -29,25 +29,20 @@ async function commentToPR(message, PRNumber){
 
 async function main() {
     let PRtoComment = await getPrNumber();
-    let message = core.getInput('messagePrefix', { required: false }) || "";
+    let messagePrefix = core.getInput('messagePrefix', { required: false }) || "";
     let messageSuffix = core.getInput('messageSuffix', { required: false }) || "";
     let messagePath = core.getInput('path', { required: true });
 
-    console.log(messagePath)
-    console.log(process.cwd())
-    console.log(__dirname)
-
     if(path.isAbsolute(messagePath)){
         fs.readFile(messagePath, async function(err, data){
-            message += data;
-            message += messageSuffix;
+            let message = messagePrefix + data + messageSuffix
 
             await commentToPR(message, PRtoComment)
         })
     }else{
-        fs.readFile(__dirname + "/" + messagePath, async function(err,data){
-            message += data;
-            message += messageSuffix;
+        let filePath = path.resolve(process.cwd(),messagePath)
+        fs.readFile(filePath, async function(err,data){
+            let message = messagePrefix + data + messageSuffix
 
             await commentToPR(message, PRtoComment)
         })
