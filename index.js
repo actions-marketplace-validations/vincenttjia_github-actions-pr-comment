@@ -14,8 +14,9 @@ async function getPrNumber() {
 }
 
 async function commentToPR(message, PRNumber){
-    const new_comment = octokit.issues.createComment({
-        ...context.repo,
+    const new_comment = octokit.rest.issues.createComment({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
         issue_number: PRNumber,
         body: message
       });
