@@ -1,0 +1,29 @@
+name: Comment to PR from file
+author: Vincent Tjianattan <t-vincent.tjianattan@traveloka.com>
+description: Comment on a PR from a file.
+branding:
+  icon: 'message-circle'
+  color: 'black'
+inputs:
+  messagePrefix:
+    description: Add a prefix to the message
+    required: false
+  messageSuffix:
+    description: Add a suffix to the message
+    required: false
+  commitSHA:
+    description: The SHA of the commit
+    required: true
+    default: ${{ github.event.pull_request.head.sha || github.sha }}
+  pr_number:
+    description: "PR Number"
+    required: true
+    default: ${{ github.event.number || false }}
+  path: 
+    description: Message content
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  

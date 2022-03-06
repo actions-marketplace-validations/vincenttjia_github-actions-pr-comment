@@ -1,0 +1,23 @@
+{
+  "name": "github-actions-pr-comment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincenttjia/github-actions-pr-comment.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vincenttjia/github-actions-pr-comment/issues"
+  },
+  "homepage": "https://github.com/vincenttjia/github-actions-pr-comment#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0"
+  }
+}
